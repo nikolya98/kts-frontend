@@ -29,8 +29,8 @@ export type ApiResponse<SuccessT, ErrorT> =
     }
   | {
       success: false;
-      status: StatusHTTP;
       data: null;
+      status: StatusHTTP;
     };
 
 export interface IApiStore {

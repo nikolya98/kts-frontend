@@ -16,8 +16,9 @@ export default class ApiStore implements IApiStore {
       params.data
     )}`;
 
-    const response = await fetch(url);
     try {
+      const response = await fetch(url);
+
       if (response.ok) {
         return {
           success: true,
