@@ -1,5 +1,5 @@
-import GitHubStore from "../store/GitHubStore/GitHubStore";
 import { ApiResponse } from "../shared/store/ApiStore/types";
+import GitHubStore from "../store/GitHubStore/GitHubStore";
 import { RepoItem } from "../store/GitHubStore/types";
 
 const gitHubStore = new GitHubStore();
@@ -12,6 +12,7 @@ gitHubStore
   })
   .then((result: ApiResponse<RepoItem[], any>) => {
     if (result.success) {
+      // eslint-disable-next-line no-console
       console.log(
         result.data.map((repo) => {
           return repo.name;
