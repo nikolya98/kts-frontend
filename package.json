@@ -18,10 +18,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject",
+    "lint": "eslint \"./src/**/*.{ts,tsx}\"",
+    "lint:fix": "eslint \"./src/**/*.{ts,tsx}\" --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -43,6 +45,11 @@
   },
   "devDependencies": {
     "@types/qs": "^6.9.7",
-    "cross-fetch": "^3.1.5"
+    "cross-fetch": "^3.1.5",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.5.1",
+    "react-app-rewire-alias": "^1.1.7",
+    "react-app-rewired": "^2.2.0"
   }
 }
