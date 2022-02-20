@@ -13,10 +13,6 @@ gitHubStore
   .then((result: ApiResponse<RepoItem[], any>) => {
     if (result.success) {
       // eslint-disable-next-line no-console
-      console.log(
-        result.data.map((repo) => {
-          return repo.name;
-        })
-      );
+      console.log(result.data);
     }
   });

@@ -5,7 +5,10 @@
       "@components/*": ["src/components/*"],
       "@config/*": ["src/config/*"],
       "@styles/*": ["src/styles/*"],
-      "@utils/*": ["src/utils/*"]
+      "@assets/*": ["src/assets/*"],
+      "@utils/*": ["src/utils/*"],
+      "@store/*": ["src/store/*"],
+      "@shared/*": ["src/shared/*"]
     }
   }
 }
