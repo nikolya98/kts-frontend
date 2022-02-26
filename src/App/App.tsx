@@ -1,4 +1,4 @@
-import ReposSearchPage from "./pages/ReposSearchPage";
+import ReposSearchPage from "@pages/ReposSearchPage";
 import "./App.css";
 
 function App() {

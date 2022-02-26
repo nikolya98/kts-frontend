@@ -7,7 +7,7 @@ import "./RepoTile.css";
 
 export type RepoTileProps = {
   item: RepoItem;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {

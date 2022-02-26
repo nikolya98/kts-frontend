@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 export type InputProps = {
   className?: string;
   type?: "text" | "checkbox" | "radio";
@@ -27,4 +29,4 @@ const Input: React.FC<InputProps> = ({
   );
 };
 
-export default Input;
+export default memo(Input);

@@ -8,8 +8,3 @@ body {
   color: var(--main-font-color);
   background-color: var(--background);
 }
-
-.container {
-  width: 397px;
-  margin: 0 auto;
-}

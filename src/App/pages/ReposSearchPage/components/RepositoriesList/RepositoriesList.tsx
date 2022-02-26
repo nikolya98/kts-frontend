@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 import RepoTile from "@components/RepoTile";
-import { RepoItem } from "src/store/GitHubStore/types";
+import { RepoItem } from "@store/GitHubStore/types";
 
 import "./RepositoriesList.css";
 
@@ -17,7 +17,7 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
       {repositories.map((repository) => {
         return (
           <li key={repository.id} className="repositories-list__item">
-            <RepoTile item={repository} onClick={() => {}} />
+            <RepoTile item={repository} />
           </li>
         );
       })}
