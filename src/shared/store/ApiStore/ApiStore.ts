@@ -1,5 +1,6 @@
-import * as qs from "qs";
 import fetch from "cross-fetch";
+import * as qs from "qs";
+
 import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from "./types";
 
 export default class ApiStore implements IApiStore {
