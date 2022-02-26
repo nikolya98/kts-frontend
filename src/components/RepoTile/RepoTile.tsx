@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
 import { RepoItem } from "@store/GitHubStore/types";
@@ -7,7 +9,7 @@ import "./RepoTile.css";
 
 export type RepoTileProps = {
   item: RepoItem;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
@@ -40,4 +42,4 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   );
 };
 
-export default RepoTile;
+export default memo(RepoTile);

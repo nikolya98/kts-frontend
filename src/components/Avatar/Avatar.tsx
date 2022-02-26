@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 export type AvatarProps = {
   className?: string;
   imgUrl: string;
@@ -24,4 +26,4 @@ const Avatar: React.FC<AvatarProps> = ({
   );
 };
 
-export default Avatar;
+export default memo(Avatar);

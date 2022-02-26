@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 import Button from "@components/Button";
 import Input from "@components/Input";
 import SearchIcon from "@components/SearchIcon";
@@ -38,4 +40,4 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);

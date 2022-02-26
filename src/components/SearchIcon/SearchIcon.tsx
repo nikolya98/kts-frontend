@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 export type SearchIconProps = {
   className?: string;
   fill?: string;
@@ -24,4 +26,4 @@ const SearchIcon: React.FC<SearchIconProps> = ({
   );
 };
 
-export default SearchIcon;
+export default memo(SearchIcon);

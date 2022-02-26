@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 export type ButtonProps = {
   className?: string;
   type?: "submit" | "button" | "reset";
@@ -25,4 +27,4 @@ const Button: React.FC<ButtonProps> = ({
   );
 };
 
-export default Button;
+export default memo(Button);

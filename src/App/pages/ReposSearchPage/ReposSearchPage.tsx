@@ -14,7 +14,9 @@ type ReposSearchPageState = {
   repositories: RepoItem[];
 };
 
-function ReposSearchPage() {
+const gitHubStore = new GitHubStore();
+
+const ReposSearchPage = () => {
   const [state, setState] = useState<ReposSearchPageState>({
     inputValue: "",
     isLoading: false,
@@ -26,8 +28,6 @@ function ReposSearchPage() {
       return;
     }
 
-    const gitHubStore = new GitHubStore();
-
     gitHubStore
       .getOrganizationReposList({
         organizationName: state.inputValue,
@@ -36,7 +36,6 @@ function ReposSearchPage() {
         if (result.success) {
           setState((prev) => {
             return {
-              ...prev,
               inputValue: "",
               isLoading: false,
               repositories: result.data,
@@ -45,7 +44,6 @@ function ReposSearchPage() {
         } else {
           setState((prev) => {
             return {
-              ...prev,
               inputValue: "",
               isLoading: false,
               repositories: [],
@@ -57,13 +55,11 @@ function ReposSearchPage() {
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
     const target = e.target as HTMLInputElement;
-    let value: string;
     if (target) {
-      value = target.value;
       setState((prev) => {
         return {
           ...prev,
-          inputValue: value,
+          inputValue: target.value,
         };
       });
     }
@@ -76,8 +72,6 @@ function ReposSearchPage() {
         isLoading: true,
       };
     });
-
-    //loadData(state.inputValue);
   };
 
   return (
@@ -92,6 +86,6 @@ function ReposSearchPage() {
       <RepositoriesList repositories={state.repositories} />
     </section>
   );
-}
+};
 
 export default ReposSearchPage;
