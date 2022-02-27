@@ -5,7 +5,7 @@ import StarIcon from "@components/StarIcon";
 import { RepoItem } from "@store/GitHubStore/types";
 import { getDate } from "@utils/getDate";
 
-import "./RepoTile.css";
+import tyleStyle from "./RepoTile.module.scss";
 
 export type RepoTileProps = {
   item: RepoItem;
@@ -14,25 +14,29 @@ export type RepoTileProps = {
 
 const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
   return (
-    <article className="card repositories-list__card" onClick={onClick}>
-      <div className="card__avatar">
+    <article
+      className={`${tyleStyle.card} repositories-list__card`}
+      onClick={onClick}
+    >
+      <div className={tyleStyle.avatar}>
         {/* letter */}
         <Avatar
-          className="card__avatar-icon"
+          className={tyleStyle["avatar-icon"]}
           imgUrl={item.owner.avatar_url}
           alt={`Иконка профиля ${item.owner.login}`}
         />
       </div>
-      <div className="card__content">
-        <h2 className="repository-title card__title">{item.name}</h2>
-        <a className="card__link" href={item.owner.html_url}>
+      <div className={tyleStyle.content}>
+        <h2 className={`repository-title ${tyleStyle.title}`}>{item.name}</h2>
+        <a className={tyleStyle.link} href={item.owner.html_url}>
           {item.owner.login}
         </a>
-        <div className="card__info">
-          <span className="card__stars">
-            <StarIcon className="card__star-icon" /> {item.stargazers_count}
+        <div className={tyleStyle.info}>
+          <span>
+            <StarIcon className={tyleStyle["star-icon"]} />{" "}
+            {item.stargazers_count}
           </span>
-          <span className="card__date">
+          <span>
             Updated{" "}
             <time dateTime={item.updated_at}>{getDate(item.updated_at)}</time>
           </span>

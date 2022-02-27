@@ -8,7 +8,7 @@ import { RepoItem } from "@store/GitHubStore/types";
 
 import RepositoriesList from "./components/RepositoriesList";
 import SearchBar from "./components/SearchBar";
-import "./ReposSearchPage.css";
+import searchPageStyle from "./ReposSearchPage.module.scss";
 
 const ReposContextProvider = ReposContext.Provider;
 const SearchBarContextProvider = SearchBarContext.Provider;
@@ -44,8 +44,8 @@ const ReposSearchPage = () => {
   }, [isLoading]);
 
   return (
-    <div className="container">
-      <section className="repositories">
+    <div className={searchPageStyle.container}>
+      <section className={searchPageStyle.repositories}>
         <h2 className="visually-hidden">Репозитории</h2>
         <SearchBarContextProvider
           value={{ inputValue, setInputValue, isLoading, setIsLoading }}

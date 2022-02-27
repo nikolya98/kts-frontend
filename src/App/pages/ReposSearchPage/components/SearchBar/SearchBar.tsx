@@ -5,7 +5,7 @@ import Input from "@components/Input";
 import SearchIcon from "@components/SearchIcon";
 import { useSearchBarContext } from "@config/contexts/SearchBarContext";
 
-import "./SearchBar.css";
+import searchBarStyle from "./SearchBar.module.scss";
 
 const SearchBar = () => {
   const { inputValue, setInputValue, isLoading, setIsLoading } =
@@ -23,20 +23,20 @@ const SearchBar = () => {
   };
 
   return (
-    <form className="search-bar repositories__search-bar">
+    <form className={searchBarStyle["search-bar"]}>
       <Input
-        className="search-bar__input"
+        className={searchBarStyle.input}
         value={inputValue}
         onChange={handleChange}
         placeholder="Введите название организации"
         disabled={isLoading}
       />
       <Button
-        className="search-bar__button"
+        className={searchBarStyle.button}
         onClick={handleClick}
         disabled={isLoading}
       >
-        <SearchIcon className="search-bar__button-icon" />
+        <SearchIcon className={searchBarStyle["button-icon"]} />
         <span className="visually-hidden">Найти</span>
       </Button>
     </form>

@@ -17,5 +17,10 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "tsconfig.paths.json", "config-overrides.js"]
+  "include": [
+    "src",
+    "tsconfig.paths.json",
+    "config-overrides.js",
+    "typings.d.ts"
+  ]
 }
