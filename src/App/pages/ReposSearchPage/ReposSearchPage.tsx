@@ -19,7 +19,23 @@ const ReposSearchPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [repositories, setRepositories] = useState<RepoItem[]>([]);
 
-  const load = () => {};
+  const load = async (repoId: string) => {
+    try {
+      const response = await fetch(
+        `https://api.github.com/repositories/${repoId}`
+      );
+      // eslint-disable-next-line no-console
+      console.log(response);
+      if (response.ok) {
+        const jsonResponse = await response.json();
+        return jsonResponse;
+      } else {
+        throw new Error("Whoooa");
+      }
+    } catch (e) {
+      return "Smth went wrong";
+    }
+  };
 
   useEffect(() => {
     if (!isLoading) {

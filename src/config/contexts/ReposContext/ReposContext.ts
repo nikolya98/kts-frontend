@@ -4,7 +4,7 @@ import { RepoItem } from "@store/GitHubStore/types";
 
 type ReposContextType = {
   repositories: RepoItem[];
-  load: () => void;
+  load: (repoName: string) => Promise<any> | void;
 };
 
 export const ReposContext = createContext<ReposContextType>({

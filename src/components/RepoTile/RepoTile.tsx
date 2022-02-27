@@ -4,6 +4,7 @@ import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
 import { RepoItem } from "@store/GitHubStore/types";
 import { getDate } from "@utils/getDate";
+import { Link } from "react-router-dom";
 
 import tyleStyle from "./RepoTile.module.scss";
 
@@ -27,7 +28,9 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         />
       </div>
       <div className={tyleStyle.content}>
-        <h2 className={`repository-title ${tyleStyle.title}`}>{item.name}</h2>
+        <Link to={`/repos/${item.id}`} className={tyleStyle["title-link"]}>
+          <h2 className={`repository-title ${tyleStyle.title}`}>{item.name}</h2>
+        </Link>
         <a className={tyleStyle.link} href={item.owner.html_url}>
           {item.owner.login}
         </a>
