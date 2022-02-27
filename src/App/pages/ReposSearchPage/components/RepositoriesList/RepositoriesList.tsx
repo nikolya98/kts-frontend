@@ -1,17 +1,13 @@
 import { memo } from "react";
 
 import RepoTile from "@components/RepoTile";
-import { RepoItem } from "@store/GitHubStore/types";
+import { useReposContext } from "@config/contexts/ReposContext";
 
 import "./RepositoriesList.css";
 
-type RepositoriesListProps = {
-  repositories: RepoItem[];
-};
+const RepositoriesList = () => {
+  const { repositories } = useReposContext();
 
-const RepositoriesList: React.FC<RepositoriesListProps> = ({
-  repositories,
-}) => {
   return (
     <ul className="repositories-list repositories__repositories-list">
       {repositories.map((repository) => {

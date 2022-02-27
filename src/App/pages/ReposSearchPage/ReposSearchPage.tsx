@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 
+import { ReposContext } from "@config/contexts/ReposContext";
+import { SearchBarContext } from "@config/contexts/SearchBarContext";
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
@@ -8,82 +10,50 @@ import RepositoriesList from "./components/RepositoriesList";
 import SearchBar from "./components/SearchBar";
 import "./ReposSearchPage.css";
 
-type ReposSearchPageState = {
-  inputValue: string;
-  isLoading: boolean;
-  repositories: RepoItem[];
-};
-
+const ReposContextProvider = ReposContext.Provider;
+const SearchBarContextProvider = SearchBarContext.Provider;
 const gitHubStore = new GitHubStore();
 
 const ReposSearchPage = () => {
-  const [state, setState] = useState<ReposSearchPageState>({
-    inputValue: "",
-    isLoading: false,
-    repositories: [],
-  });
+  const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [repositories, setRepositories] = useState<RepoItem[]>([]);
+
+  const load = () => {};
 
   useEffect(() => {
-    if (!state.isLoading) {
+    if (!isLoading) {
       return;
     }
 
     gitHubStore
       .getOrganizationReposList({
-        organizationName: state.inputValue,
+        organizationName: inputValue,
       })
       .then((result: ApiResponse<RepoItem[], any>) => {
         if (result.success) {
-          setState((prev) => {
-            return {
-              inputValue: "",
-              isLoading: false,
-              repositories: result.data,
-            };
-          });
+          setInputValue("");
+          setIsLoading(false);
+          setRepositories(result.data);
         } else {
-          setState((prev) => {
-            return {
-              inputValue: "",
-              isLoading: false,
-              repositories: [],
-            };
-          });
+          setInputValue("");
+          setIsLoading(false);
+          setRepositories([]);
         }
       });
-  }, [state.isLoading]);
-
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    const target = e.target as HTMLInputElement;
-    if (target) {
-      setState((prev) => {
-        return {
-          ...prev,
-          inputValue: target.value,
-        };
-      });
-    }
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    setState((prev) => {
-      return {
-        ...prev,
-        isLoading: true,
-      };
-    });
-  };
+  }, [isLoading]);
 
   return (
     <section className="repositories">
       <h2 className="visually-hidden">Репозитории</h2>
-      <SearchBar
-        onChange={handleChange}
-        onClick={handleClick}
-        inputValue={state.inputValue}
-        isLoading={state.isLoading}
-      />
-      <RepositoriesList repositories={state.repositories} />
+      <SearchBarContextProvider
+        value={{ inputValue, setInputValue, isLoading, setIsLoading }}
+      >
+        <SearchBar />
+      </SearchBarContextProvider>
+      <ReposContextProvider value={{ repositories, load }}>
+        <RepositoriesList />
+      </ReposContextProvider>
     </section>
   );
 };
