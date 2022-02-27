@@ -44,17 +44,19 @@ const ReposSearchPage = () => {
   }, [isLoading]);
 
   return (
-    <section className="repositories">
-      <h2 className="visually-hidden">Репозитории</h2>
-      <SearchBarContextProvider
-        value={{ inputValue, setInputValue, isLoading, setIsLoading }}
-      >
-        <SearchBar />
-      </SearchBarContextProvider>
-      <ReposContextProvider value={{ repositories, load }}>
-        <RepositoriesList />
-      </ReposContextProvider>
-    </section>
+    <div className="container">
+      <section className="repositories">
+        <h2 className="visually-hidden">Репозитории</h2>
+        <SearchBarContextProvider
+          value={{ inputValue, setInputValue, isLoading, setIsLoading }}
+        >
+          <SearchBar />
+        </SearchBarContextProvider>
+        <ReposContextProvider value={{ repositories, load }}>
+          <RepositoriesList />
+        </ReposContextProvider>
+      </section>
+    </div>
   );
 };
 
