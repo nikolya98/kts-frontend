@@ -20,7 +20,6 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
       onClick={onClick}
     >
       <div className={tyleStyle.avatar}>
-        {/* letter */}
         <Avatar
           className={tyleStyle["avatar-icon"]}
           imgUrl={item.owner.avatar_url}

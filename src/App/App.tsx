@@ -7,7 +7,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/repos" />} />
       <Route path="/repos" element={<ReposSearchPage />} />
-      <Route path="/repos/:id" element={<RepoPage />} />
+      <Route path="/repos/:repoId" element={<RepoPage />} />
       <Route path="*" element={<Navigate to="/repos" />} />
     </Routes>
   );

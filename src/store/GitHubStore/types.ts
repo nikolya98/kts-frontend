@@ -4,6 +4,10 @@ export type GetOrganizationReposListParams = {
   organizationName: string;
 };
 
+export type GetRepositoriesParams = {
+  repositoryId?: number;
+};
+
 export type GitHubRepoOwner = {
   id: number;
   html_url: string;
