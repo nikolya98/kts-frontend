@@ -67,7 +67,7 @@
   color: $black-color;
 }
 
-.link {
+:global(.link) {
   color: $main-font-color;
   text-decoration: none;
   cursor: $cursor;

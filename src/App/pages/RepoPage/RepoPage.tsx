@@ -34,7 +34,11 @@ const RepoPage = () => {
   }, []);
 
   if (repo) {
-    return <Repo repo={repo} />;
+    return (
+      <div className="container">
+        <Repo repo={repo} />;
+      </div>
+    );
   }
 
   return <h1>{error ? "error" : ""}</h1>;

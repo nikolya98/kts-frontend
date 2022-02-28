@@ -42,7 +42,7 @@ const ReposSearchPage = () => {
   }, [isLoading]);
 
   return (
-    <div className={searchPageStyle.container}>
+    <div className="container">
       <section className={searchPageStyle.repositories}>
         <h2 className="visually-hidden">Репозитории</h2>
         <SearchBarContextProvider

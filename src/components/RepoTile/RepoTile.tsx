@@ -30,7 +30,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         <Link to={`/repos/${item.id}`} className={tyleStyle["title-link"]}>
           <h2 className={`repository-title ${tyleStyle.title}`}>{item.name}</h2>
         </Link>
-        <a className={tyleStyle.link} href={item.owner.html_url}>
+        <a className="link" href={item.owner.html_url}>
           {item.owner.login}
         </a>
         <div className={tyleStyle.info}>
