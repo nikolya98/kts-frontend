@@ -5,6 +5,8 @@ import GitHubStore from "@store/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
 import { useParams } from "react-router-dom";
 
+import Repo from "./components/Repo";
+
 const gitHubStore = new GitHubStore();
 
 const RepoPage = () => {
@@ -20,7 +22,11 @@ const RepoPage = () => {
           const [targetRepo] = result.data.filter(
             ({ id }) => id === Number(repoId)
           );
-          setRepo(targetRepo);
+          if (targetRepo) {
+            setRepo(targetRepo);
+          } else {
+            setError(true);
+          }
         } else {
           setError(true);
         }
@@ -28,7 +34,7 @@ const RepoPage = () => {
   }, []);
 
   if (repo) {
-    return <h1>{repo.name}</h1>;
+    return <Repo repo={repo} />;
   }
 
   return <h1>{error ? "error" : ""}</h1>;

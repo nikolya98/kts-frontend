@@ -2,6 +2,8 @@ import ApiStore from "@shared/store/ApiStore";
 import { ApiResponse, HTTPMethod } from "@shared/store/ApiStore/types";
 
 import {
+  BranchItem,
+  GetBranchesParams,
   GetOrganizationReposListParams,
   GetRepositoriesParams,
   IGitHubStore,
@@ -23,6 +25,7 @@ export default class GitHubStore implements IGitHubStore {
       endpoint: `/orgs/${params.organizationName}/repos`,
     });
   }
+
   async getRepositories(
     params: GetRepositoriesParams
   ): Promise<ApiResponse<RepoItem[], any>> {
@@ -31,6 +34,17 @@ export default class GitHubStore implements IGitHubStore {
       data: params.repositoryId ? { since: params.repositoryId - 1 } : {},
       headers: {},
       endpoint: "/repositories",
+    });
+  }
+
+  async getBranches(
+    params: GetBranchesParams
+  ): Promise<ApiResponse<BranchItem[], any>> {
+    return await this.apiStore.request({
+      method: HTTPMethod.GET,
+      data: {},
+      headers: {},
+      endpoint: `/repos/${params.owner}/${params.repo}/branches`,
     });
   }
 }
