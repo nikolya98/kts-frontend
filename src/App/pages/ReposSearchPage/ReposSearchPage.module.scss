@@ -1,3 +1,8 @@
+:global(.container) {
+  width: 397px;
+  margin: 0 auto;
+}
+
 .repositories {
   display: grid;
   grid-template-rows: 50px 1fr;

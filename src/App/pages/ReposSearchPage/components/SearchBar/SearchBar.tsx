@@ -1,39 +1,48 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
 import SearchIcon from "@components/SearchIcon";
+import { useSearchBarContext } from "@config/contexts/SearchBarContext";
 
-import "./SearchBar.css";
+import searchBarStyle from "./SearchBar.module.scss";
 
-type SearchBarProps = {
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
-  onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
-  inputValue: string;
-  isLoading: boolean;
-};
+const SearchBar: React.FC = () => {
+  const { inputValue, setInputValue, isLoading, setIsLoading } =
+    useSearchBarContext();
 
-const SearchBar: React.FC<SearchBarProps> = ({
-  inputValue,
-  isLoading,
-  onChange,
-  onClick,
-}) => {
+  const handleChange = useCallback(
+    (e: React.FormEvent<HTMLInputElement>): void => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        setInputValue(target.value);
+      }
+    },
+    [setInputValue]
+  );
+
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>): void => {
+      setIsLoading(true);
+    },
+    [setIsLoading]
+  );
+
   return (
-    <form className="search-bar repositories__search-bar">
+    <form className={searchBarStyle["search-bar"]}>
       <Input
-        className="search-bar__input"
+        className={searchBarStyle.input}
         value={inputValue}
-        onChange={onChange}
+        onChange={handleChange}
         placeholder="Введите название организации"
         disabled={isLoading}
       />
       <Button
-        className="search-bar__button"
-        onClick={onClick}
+        className={searchBarStyle.button}
+        onClick={handleClick}
         disabled={isLoading}
       >
-        <SearchIcon className="search-bar__button-icon" />
+        <SearchIcon className={searchBarStyle["button-icon"]} />
         <span className="visually-hidden">Найти</span>
       </Button>
     </form>

@@ -1,12 +1,15 @@
+import RepoPage from "@pages/RepoPage";
 import ReposSearchPage from "@pages/ReposSearchPage";
-import "./App.css";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="container">
-      <ReposSearchPage />
-    </div>
+    <Routes>
+      <Route path="/repos" element={<ReposSearchPage />} />
+      <Route path="/repos/:repoId" element={<RepoPage />} />
+      <Route path="*" element={<Navigate to="/repos" />} />
+    </Routes>
   );
-}
+};
 
 export default App;
