@@ -5,7 +5,7 @@ import { useReposContext } from "@config/contexts/ReposContext";
 
 import repositoriesListStyle from "./RepositoriesList.module.scss";
 
-const RepositoriesList = () => {
+const RepositoriesList: React.FC = () => {
   const { repositories } = useReposContext();
 
   return (

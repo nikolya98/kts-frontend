@@ -14,7 +14,7 @@ const ReposContextProvider = ReposContext.Provider;
 const SearchBarContextProvider = SearchBarContext.Provider;
 const gitHubStore = new GitHubStore();
 
-const ReposSearchPage = () => {
+const ReposSearchPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [repositories, setRepositories] = useState<RepoItem[]>([]);

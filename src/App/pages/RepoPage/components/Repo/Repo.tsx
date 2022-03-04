@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
@@ -67,4 +67,4 @@ const Repo: React.FC<RepoProps> = ({ repo }) => {
   );
 };
 
-export default Repo;
+export default memo(Repo);

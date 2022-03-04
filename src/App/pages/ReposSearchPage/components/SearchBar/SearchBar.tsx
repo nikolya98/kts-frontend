@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 import Button from "@components/Button";
 import Input from "@components/Input";
@@ -7,20 +7,26 @@ import { useSearchBarContext } from "@config/contexts/SearchBarContext";
 
 import searchBarStyle from "./SearchBar.module.scss";
 
-const SearchBar = () => {
+const SearchBar: React.FC = () => {
   const { inputValue, setInputValue, isLoading, setIsLoading } =
     useSearchBarContext();
 
-  const handleChange = (e: React.FormEvent<HTMLInputElement>): void => {
-    const target = e.target as HTMLInputElement;
-    if (target) {
-      setInputValue(target.value);
-    }
-  };
+  const handleChange = useCallback(
+    (e: React.FormEvent<HTMLInputElement>): void => {
+      const target = e.target as HTMLInputElement;
+      if (target) {
+        setInputValue(target.value);
+      }
+    },
+    [setInputValue]
+  );
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>): void => {
-    setIsLoading(true);
-  };
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>): void => {
+      setIsLoading(true);
+    },
+    [setIsLoading]
+  );
 
   return (
     <form className={searchBarStyle["search-bar"]}>

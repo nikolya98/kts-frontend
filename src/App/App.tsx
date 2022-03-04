@@ -2,7 +2,7 @@ import RepoPage from "@pages/RepoPage";
 import ReposSearchPage from "@pages/ReposSearchPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/repos" />} />
@@ -11,6 +11,6 @@ function App() {
       <Route path="*" element={<Navigate to="/repos" />} />
     </Routes>
   );
-}
+};
 
 export default App;

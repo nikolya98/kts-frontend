@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
@@ -9,18 +9,20 @@ import Repo from "./components/Repo";
 
 const gitHubStore = new GitHubStore();
 
-const RepoPage = () => {
+const RepoPage: React.FC = () => {
   const [repo, setRepo] = useState<RepoItem | null>(null);
   const [error, setError] = useState(false);
   const { repoId } = useParams();
 
   useEffect(() => {
+    const repositoryId = Number(repoId);
+
     gitHubStore
-      .getRepositories({ repositoryId: Number(repoId) })
+      .getRepositories({ repositoryId })
       .then((result: ApiResponse<RepoItem[], any>) => {
         if (result.success) {
           const [targetRepo] = result.data.filter(
-            ({ id }) => id === Number(repoId)
+            ({ id }) => id === repositoryId
           );
           if (targetRepo) {
             setRepo(targetRepo);
@@ -31,7 +33,7 @@ const RepoPage = () => {
           setError(true);
         }
       });
-  }, []);
+  }, [repoId]);
 
   if (repo) {
     return (
@@ -44,4 +46,4 @@ const RepoPage = () => {
   return <h1>{error ? "error" : ""}</h1>;
 };
 
-export default RepoPage;
+export default memo(RepoPage);
