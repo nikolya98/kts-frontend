@@ -5,7 +5,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 const App: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/repos" />} />
       <Route path="/repos" element={<ReposSearchPage />} />
       <Route path="/repos/:repoId" element={<RepoPage />} />
       <Route path="*" element={<Navigate to="/repos" />} />
