@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 
 import { ReposContext } from "@config/contexts/ReposContext";
 import { SearchBarContext } from "@config/contexts/SearchBarContext";
+import {
+  normalizeRepoItemData,
+  RepoItemApi,
+  RepoItemModel,
+} from "@models/gitHub";
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
 import { RepoItem } from "@store/GitHubStore/types";
@@ -17,7 +22,7 @@ const gitHubStore = new GitHubStore();
 const ReposSearchPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [repositories, setRepositories] = useState<RepoItem[]>([]);
+  const [repositories, setRepositories] = useState<RepoItemModel[]>([]);
 
   useEffect(() => {
     if (!isLoading) {
@@ -32,7 +37,11 @@ const ReposSearchPage: React.FC = () => {
         if (result.success) {
           setInputValue("");
           setIsLoading(false);
-          setRepositories(result.data);
+          setRepositories(
+            result.data.map(
+              (repo: RepoItemApi): RepoItemModel => normalizeRepoItemData(repo)
+            )
+          );
         } else {
           setInputValue("");
           setIsLoading(false);

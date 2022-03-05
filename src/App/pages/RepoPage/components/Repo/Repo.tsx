@@ -1,27 +1,37 @@
 import { memo, useEffect, useState } from "react";
 
+import {
+  BranchItemApi,
+  BranchItemModel,
+  normalizeBranchItemData,
+  RepoItemModel,
+} from "@models/gitHub";
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
-import { BranchItem, RepoItem } from "@store/GitHubStore/types";
 
 import RepoStyle from "./Repo.module.scss";
 
 type RepoProps = {
-  repo: RepoItem;
+  repo: RepoItemModel;
 };
 
 const gitHubStore = new GitHubStore();
 const BASE_URL = "https://github.com";
 
 const Repo: React.FC<RepoProps> = ({ repo }) => {
-  const [branches, setBranches] = useState<BranchItem[]>([]);
+  const [branches, setBranches] = useState<BranchItemModel[]>([]);
 
   useEffect(() => {
     gitHubStore
       .getBranches({ repo: repo.name, owner: repo.owner.login })
-      .then((result: ApiResponse<BranchItem[], any>) => {
+      .then((result: ApiResponse<BranchItemApi[], any>) => {
         if (result.success) {
-          setBranches(result.data);
+          setBranches(
+            result.data.map(
+              (branch: BranchItemApi): BranchItemModel =>
+                normalizeBranchItemData(branch)
+            )
+          );
         }
       });
   }, []);
@@ -36,11 +46,11 @@ const Repo: React.FC<RepoProps> = ({ repo }) => {
         <dl>
           <dt className={RepoStyle.defenition}>name:</dt>
           <dd className={RepoStyle.description}>
-            <a href={repo.html_url}>{repo.name}</a>
+            <a href={repo.htmlUrl}>{repo.name}</a>
           </dd>
           <dt className={RepoStyle.defenition}>owner:</dt>
           <dd className={RepoStyle.description}>
-            <a href={repo.owner.html_url}>{repo.owner.login}</a>
+            <a href={repo.owner.htmlUrl}>{repo.owner.login}</a>
           </dd>
           <dt className={RepoStyle.defenition}>description:</dt>
           <dd className={RepoStyle.description}>{repo.description}</dd>

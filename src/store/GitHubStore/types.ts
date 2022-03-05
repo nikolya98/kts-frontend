@@ -7,6 +7,7 @@ export type GetOrganizationReposListParams = {
 export type GetRepositoriesParams = {
   repositoryId?: number;
 };
+
 export type GetBranchesParams = {
   owner: string;
   repo: string;

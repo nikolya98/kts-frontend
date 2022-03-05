@@ -9,7 +9,8 @@
       "@utils/*": ["src/utils/*"],
       "@store/*": ["src/store/*"],
       "@shared/*": ["src/shared/*"],
-      "@pages/*": ["src/App/pages/*"]
+      "@pages/*": ["src/App/pages/*"],
+      "@models/*": ["src/models/*"]
     }
   }
 }

@@ -1,13 +1,12 @@
+import { RepoItemApi, BranchItemApi } from "@models/gitHub";
 import ApiStore from "@shared/store/ApiStore";
 import { ApiResponse, HTTPMethod } from "@shared/store/ApiStore/types";
 
 import {
-  BranchItem,
   GetBranchesParams,
   GetOrganizationReposListParams,
   GetRepositoriesParams,
   IGitHubStore,
-  RepoItem,
 } from "./types";
 
 const BASE_URL = "https://api.github.com";
@@ -17,7 +16,7 @@ export default class GitHubStore implements IGitHubStore {
 
   async getOrganizationReposList(
     params: GetOrganizationReposListParams
-  ): Promise<ApiResponse<RepoItem[], any>> {
+  ): Promise<ApiResponse<RepoItemApi[], any>> {
     return await this.apiStore.request({
       method: HTTPMethod.GET,
       data: {},
@@ -28,7 +27,7 @@ export default class GitHubStore implements IGitHubStore {
 
   async getRepositories(
     params: GetRepositoriesParams
-  ): Promise<ApiResponse<RepoItem[], any>> {
+  ): Promise<ApiResponse<RepoItemApi[], any>> {
     return await this.apiStore.request({
       method: HTTPMethod.GET,
       data: params.repositoryId ? { since: params.repositoryId - 1 } : {},
@@ -39,7 +38,7 @@ export default class GitHubStore implements IGitHubStore {
 
   async getBranches(
     params: GetBranchesParams
-  ): Promise<ApiResponse<BranchItem[], any>> {
+  ): Promise<ApiResponse<BranchItemApi[], any>> {
     return await this.apiStore.request({
       method: HTTPMethod.GET,
       data: {},

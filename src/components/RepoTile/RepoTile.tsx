@@ -2,14 +2,14 @@ import { memo } from "react";
 
 import Avatar from "@components/Avatar";
 import StarIcon from "@components/StarIcon";
-import { RepoItem } from "@store/GitHubStore/types";
+import { RepoItemModel } from "@models/gitHub";
 import { getDate } from "@utils/getDate";
 import { Link } from "react-router-dom";
 
 import tyleStyle from "./RepoTile.module.scss";
 
 export type RepoTileProps = {
-  item: RepoItem;
+  item: RepoItemModel;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
@@ -22,7 +22,7 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
       <div className={tyleStyle.avatar}>
         <Avatar
           className={tyleStyle["avatar-icon"]}
-          imgUrl={item.owner.avatar_url}
+          imgUrl={item.owner.avatarUrl}
           alt={`Иконка профиля ${item.owner.login}`}
         />
       </div>
@@ -30,17 +30,17 @@ const RepoTile: React.FC<RepoTileProps> = ({ item, onClick }) => {
         <Link to={`/repos/${item.id}`} className={tyleStyle["title-link"]}>
           <h2 className={`repository-title ${tyleStyle.title}`}>{item.name}</h2>
         </Link>
-        <a className="link" href={item.owner.html_url}>
+        <a className="link" href={item.owner.htmlUrl}>
           {item.owner.login}
         </a>
         <div className={tyleStyle.info}>
           <span>
             <StarIcon className={tyleStyle["star-icon"]} />{" "}
-            {item.stargazers_count}
+            {item.stargazersCount}
           </span>
           <span>
             Updated{" "}
-            <time dateTime={item.updated_at}>{getDate(item.updated_at)}</time>
+            <time dateTime={item.updatedAt}>{getDate(item.updatedAt)}</time>
           </span>
         </div>
       </div>
