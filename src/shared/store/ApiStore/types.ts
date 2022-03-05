@@ -1,3 +1,10 @@
+export enum Meta {
+  initial = "initial",
+  loading = "loading",
+  success = "success",
+  error = "error",
+}
+
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",

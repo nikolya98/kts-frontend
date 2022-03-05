@@ -4,12 +4,12 @@ import Button from "@components/Button";
 import Input from "@components/Input";
 import SearchIcon from "@components/SearchIcon";
 import { useSearchBarContext } from "@config/contexts/SearchBarContext";
+import { Meta } from "@shared/store/ApiStore/types";
 
 import searchBarStyle from "./SearchBar.module.scss";
 
 const SearchBar: React.FC = () => {
-  const { inputValue, setInputValue, isLoading, setIsLoading } =
-    useSearchBarContext();
+  const { inputValue, setInputValue, load, isLoading } = useSearchBarContext();
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>): void => {
@@ -23,9 +23,9 @@ const SearchBar: React.FC = () => {
 
   const handleClick = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>): void => {
-      setIsLoading(true);
+      load();
     },
-    [setIsLoading]
+    [load]
   );
 
   return (
@@ -35,12 +35,12 @@ const SearchBar: React.FC = () => {
         value={inputValue}
         onChange={handleChange}
         placeholder="Введите название организации"
-        disabled={isLoading}
+        disabled={isLoading === Meta.loading}
       />
       <Button
         className={searchBarStyle.button}
         onClick={handleClick}
-        disabled={isLoading}
+        disabled={isLoading === Meta.loading}
       >
         <SearchIcon className={searchBarStyle["button-icon"]} />
         <span className="visually-hidden">Найти</span>
