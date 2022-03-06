@@ -1,13 +1,8 @@
-import { memo, useEffect, useState } from "react";
+import { memo, useEffect } from "react";
 
-import {
-  BranchItemApi,
-  BranchItemModel,
-  normalizeBranchItemData,
-  RepoItemModel,
-} from "@models/gitHub";
-import { ApiResponse } from "@shared/store/ApiStore/types";
-import GitHubStore from "@store/GitHubStore";
+import { RepoItemModel } from "@models/gitHub";
+import BranchesStore from "@store/BranchesStore";
+import useLocalStore from "@store/useLocalStore";
 import { autorun } from "mobx";
 import { observer } from "mobx-react-lite";
 
@@ -17,27 +12,15 @@ type RepoProps = {
   repo: RepoItemModel;
 };
 
-const gitHubStore = new GitHubStore();
-const BASE_URL = "https://github.com";
+const BASE_URL = "https://api.github.com";
 
 const Repo: React.FC<RepoProps> = ({ repo }) => {
-  const [branches, setBranches] = useState<BranchItemModel[]>([]);
+  const branchesStore = useLocalStore(() => new BranchesStore());
 
   useEffect(
     () =>
       autorun(() => {
-        gitHubStore
-          .getBranches({ repo: repo.name, owner: repo.owner.login })
-          .then((result: ApiResponse<BranchItemApi[], any>) => {
-            if (result.success) {
-              setBranches(
-                result.data.map(
-                  (branch: BranchItemApi): BranchItemModel =>
-                    normalizeBranchItemData(branch)
-                )
-              );
-            }
-          });
+        branchesStore.getBranches({ owner: repo.owner.login, repo: repo.name });
       }),
     []
   );
@@ -65,7 +48,7 @@ const Repo: React.FC<RepoProps> = ({ repo }) => {
       <section>
         <h2 className={RepoStyle.title}>Branches</h2>
         <ul className={RepoStyle.branches}>
-          {branches.map((branch) => {
+          {branchesStore.branches.map((branch) => {
             return (
               <li key={branch.name}>
                 <a

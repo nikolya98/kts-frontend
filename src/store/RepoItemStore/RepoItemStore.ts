@@ -6,6 +6,7 @@ import {
 import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod, Meta, StatusHTTP } from "@shared/store/ApiStore/types";
 import { GetRepositoryParams } from "@store/GitHubStore/types";
+import rootStoreInstance from "@store/RootStore";
 import { ILocalStore } from "@store/useLocalStore";
 import {
   action,
@@ -14,8 +15,6 @@ import {
   observable,
   runInAction,
 } from "mobx";
-
-const BASE_URL = "https://api.github.com";
 
 type PrivateRepoItemStoreFields = "_repo" | "_meta";
 
@@ -30,7 +29,7 @@ class RepoItemStore implements ILocalStore {
     });
   }
 
-  private readonly _apiStore = new ApiStore(BASE_URL);
+  private readonly _apiStore: ApiStore = rootStoreInstance.apiStore;
   private _repo: RepoItemModel | null = null;
   private _meta = Meta.initial;
 
