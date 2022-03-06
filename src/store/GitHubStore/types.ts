@@ -4,8 +4,8 @@ export type GetOrganizationReposListParams = {
   organizationName: string;
 };
 
-export type GetRepositoriesParams = {
-  repositoryId?: number;
+export type GetRepositoryParams = {
+  repositoryId: number;
 };
 
 export type GetBranchesParams = {

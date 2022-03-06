@@ -5,7 +5,7 @@ import { ApiResponse, HTTPMethod } from "@shared/store/ApiStore/types";
 import {
   GetBranchesParams,
   GetOrganizationReposListParams,
-  GetRepositoriesParams,
+  GetRepositoryParams,
   IGitHubStore,
 } from "./types";
 
@@ -26,7 +26,7 @@ export default class GitHubStore implements IGitHubStore {
   }
 
   async getRepositories(
-    params: GetRepositoriesParams
+    params: GetRepositoryParams
   ): Promise<ApiResponse<RepoItemApi[], any>> {
     return await this.apiStore.request({
       method: HTTPMethod.GET,

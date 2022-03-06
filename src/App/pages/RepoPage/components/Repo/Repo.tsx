@@ -8,6 +8,8 @@ import {
 } from "@models/gitHub";
 import { ApiResponse } from "@shared/store/ApiStore/types";
 import GitHubStore from "@store/GitHubStore";
+import { autorun } from "mobx";
+import { observer } from "mobx-react-lite";
 
 import RepoStyle from "./Repo.module.scss";
 
@@ -21,20 +23,24 @@ const BASE_URL = "https://github.com";
 const Repo: React.FC<RepoProps> = ({ repo }) => {
   const [branches, setBranches] = useState<BranchItemModel[]>([]);
 
-  useEffect(() => {
-    gitHubStore
-      .getBranches({ repo: repo.name, owner: repo.owner.login })
-      .then((result: ApiResponse<BranchItemApi[], any>) => {
-        if (result.success) {
-          setBranches(
-            result.data.map(
-              (branch: BranchItemApi): BranchItemModel =>
-                normalizeBranchItemData(branch)
-            )
-          );
-        }
-      });
-  }, []);
+  useEffect(
+    () =>
+      autorun(() => {
+        gitHubStore
+          .getBranches({ repo: repo.name, owner: repo.owner.login })
+          .then((result: ApiResponse<BranchItemApi[], any>) => {
+            if (result.success) {
+              setBranches(
+                result.data.map(
+                  (branch: BranchItemApi): BranchItemModel =>
+                    normalizeBranchItemData(branch)
+                )
+              );
+            }
+          });
+      }),
+    []
+  );
 
   return (
     <article className={RepoStyle.grid}>
@@ -77,4 +83,4 @@ const Repo: React.FC<RepoProps> = ({ repo }) => {
   );
 };
 
-export default memo(Repo);
+export default memo(observer(Repo));
