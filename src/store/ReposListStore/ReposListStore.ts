@@ -1,4 +1,11 @@
 import {
+  collectionFromArray,
+  CollectionModel,
+  getInitialCollection,
+  linearizeCollection,
+  normalizeCollection,
+} from "@models/Collection/Collection";
+import {
   normalizeRepoItemData,
   RepoItemApi,
   RepoItemModel,
@@ -31,11 +38,12 @@ class ReposListStore implements ILocalStore {
   }
 
   private readonly _apiStore: ApiStore = rootStoreInstance.apiStore;
-  private _reposList: RepoItemModel[] = [];
+  private _reposList: CollectionModel<number, RepoItemModel> =
+    getInitialCollection();
   private _meta = Meta.initial;
 
   get reposList(): RepoItemModel[] {
-    return this._reposList;
+    return linearizeCollection(this._reposList);
   }
 
   get meta(): Meta {
@@ -48,7 +56,7 @@ class ReposListStore implements ILocalStore {
 
   async getReposList(params: GetOrganizationReposListParams): Promise<void> {
     this._meta = Meta.loading;
-    this._reposList = [];
+    this._reposList = getInitialCollection();
 
     try {
       const response = await this._apiStore.request<RepoItemApi[]>({
@@ -60,12 +68,21 @@ class ReposListStore implements ILocalStore {
 
       runInAction(() => {
         if (response.status === StatusHTTP.Ok) {
-          this._meta = Meta.success;
-          this._reposList = response.data.map(
-            (repo: RepoItemApi): RepoItemModel => normalizeRepoItemData(repo)
-          );
-
-          return;
+          try {
+            this._meta = Meta.success;
+            const collection = collectionFromArray<number, RepoItemApi>(
+              response.data
+            );
+            this._reposList = normalizeCollection<
+              number,
+              RepoItemApi,
+              RepoItemModel
+            >(collection, normalizeRepoItemData);
+          } catch (error) {
+            this._meta = Meta.error;
+            this._reposList = getInitialCollection();
+            return;
+          }
         }
 
         this._meta = Meta.error;
@@ -73,7 +90,7 @@ class ReposListStore implements ILocalStore {
     } catch (error) {
       runInAction(() => {
         this._meta = Meta.error;
-        this._reposList = [];
+        this._reposList = getInitialCollection();
       });
     }
   }
