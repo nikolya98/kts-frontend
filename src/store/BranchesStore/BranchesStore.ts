@@ -4,15 +4,13 @@ import {
   getInitialCollection,
   linearizeCollection,
   normalizeCollection,
-} from "@models/Collection/Collection";
+} from "@models/Collection";
 import {
   BranchItemApi,
   BranchItemModel,
   normalizeBranchItemData,
 } from "@models/gitHub";
-import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod, Meta, StatusHTTP } from "@shared/store/ApiStore/types";
-import { GetBranchesParams } from "@store/GitHubStore/types";
 import rootStoreInstance from "@store/RootStore";
 import { ILocalStore } from "@store/useLocalStore";
 import {
@@ -23,9 +21,11 @@ import {
   runInAction,
 } from "mobx";
 
+import { GetBranchesParams, IBranchesStore } from "./types";
+
 type BranchesStorePrivateFields = "_meta" | "_branches";
 
-class BranchesStore implements ILocalStore {
+class BranchesStore implements IBranchesStore, ILocalStore {
   constructor() {
     makeObservable<BranchesStore, BranchesStorePrivateFields>(this, {
       _branches: observable,
@@ -36,7 +36,7 @@ class BranchesStore implements ILocalStore {
     });
   }
 
-  private readonly _apiStore: ApiStore = rootStoreInstance.apiStore;
+  private readonly _apiStore = rootStoreInstance.apiStore;
   private _branches: CollectionModel<number, BranchItemModel> =
     getInitialCollection();
   private _meta = Meta.initial;

@@ -3,9 +3,7 @@ import {
   RepoItemApi,
   RepoItemModel,
 } from "@models/gitHub";
-import ApiStore from "@shared/store/ApiStore";
 import { HTTPMethod, Meta, StatusHTTP } from "@shared/store/ApiStore/types";
-import { GetRepositoryParams } from "@store/GitHubStore/types";
 import rootStoreInstance from "@store/RootStore";
 import { ILocalStore } from "@store/useLocalStore";
 import {
@@ -16,9 +14,11 @@ import {
   runInAction,
 } from "mobx";
 
+import { GetRepoParams, IRepoItemStore } from "./types";
+
 type PrivateRepoItemStoreFields = "_repo" | "_meta";
 
-class RepoItemStore implements ILocalStore {
+class RepoItemStore implements IRepoItemStore, ILocalStore {
   constructor() {
     makeObservable<RepoItemStore, PrivateRepoItemStoreFields>(this, {
       _repo: observable,
@@ -29,7 +29,7 @@ class RepoItemStore implements ILocalStore {
     });
   }
 
-  private readonly _apiStore: ApiStore = rootStoreInstance.apiStore;
+  private readonly _apiStore = rootStoreInstance.apiStore;
   private _repo: RepoItemModel | null = null;
   private _meta = Meta.initial;
 
@@ -41,7 +41,7 @@ class RepoItemStore implements ILocalStore {
     return this._meta;
   }
 
-  async getRepo(params: GetRepositoryParams): Promise<void> {
+  async getRepo(params: GetRepoParams): Promise<void> {
     this._meta = Meta.loading;
     this._repo = null;
 

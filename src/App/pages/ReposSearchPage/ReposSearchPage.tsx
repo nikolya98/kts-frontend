@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useCallback } from "react";
 
 import { ReposContext } from "@config/contexts/ReposContext";
 import { SearchBarContext } from "@config/contexts/SearchBarContext";
@@ -20,9 +19,7 @@ const ReposSearchPage: React.FC = () => {
   const reposListStore = useLocalStore(() => new ReposListStore());
   const [organization, setOrganization] = useState("");
   const repositories = reposListStore.reposList;
-  const load = useCallback((): void => {
-    reposListStore.setMeta(Meta.loading);
-  }, []);
+  const load = (): void => reposListStore.setMeta(Meta.loading);
   const isLoading = reposListStore.meta;
 
   useEffect(

@@ -1,4 +1,4 @@
-import { useEffect, memo } from "react";
+import { useEffect } from "react";
 
 import { Meta } from "@shared/store/ApiStore/types";
 import RepoItemStore from "@store/RepoItemStore";
@@ -28,4 +28,4 @@ const RepoPage: React.FC = () => {
   return <h1>{repoItemStore.meta === Meta.error ? "error" : ""}</h1>;
 };
 
-export default memo(observer(RepoPage));
+export default observer(RepoPage);

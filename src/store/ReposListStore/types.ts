@@ -1,5 +1,7 @@
-import { GetOrganizationReposListParams } from "@store/GitHubStore/types";
+export type GetReposListParams = {
+  organizationName: string;
+};
 
 export interface IReposListStore {
-  getReposList(params: GetOrganizationReposListParams): Promise<any>;
+  getReposList(params: GetReposListParams): Promise<any>;
 }

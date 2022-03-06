@@ -1,5 +1,3 @@
-import { memo } from "react";
-
 import RepoTile from "@components/RepoTile";
 import { useReposContext } from "@config/contexts/ReposContext";
 
@@ -21,4 +19,4 @@ const RepositoriesList: React.FC = () => {
   );
 };
 
-export default memo(RepositoriesList);
+export default RepositoriesList;
