@@ -18,7 +18,7 @@ export type RequestParams<ReqT> = {
 };
 
 export enum StatusHTTP {
-  Ok = 200,
+  OK = 200,
   InternalServerError = 500,
   UNEXPECTED_ERROR = "UNEXPECTED_ERROR",
 }

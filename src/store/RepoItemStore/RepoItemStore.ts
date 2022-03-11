@@ -54,7 +54,7 @@ class RepoItemStore implements IRepoItemStore, ILocalStore {
       });
 
       runInAction(() => {
-        if (response.status === StatusHTTP.Ok) {
+        if (response.status === StatusHTTP.OK) {
           const [targetRepo] = response.data.filter(
             (repo: RepoItemApi) => repo.id === params.repositoryId
           );

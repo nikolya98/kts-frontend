@@ -62,7 +62,7 @@ class BranchesStore implements IBranchesStore, ILocalStore {
       });
 
       runInAction(() => {
-        if (response.status === StatusHTTP.Ok) {
+        if (response.status === StatusHTTP.OK) {
           const branches = collectionFromArray<number, BranchItemModel>(
             response.data
           );
@@ -81,7 +81,9 @@ class BranchesStore implements IBranchesStore, ILocalStore {
     }
   }
 
-  destroy() {}
+  destroy() {
+    // nothing to do
+  }
 }
 
 export default BranchesStore;

@@ -67,7 +67,7 @@ class ReposListStore implements ILocalStore {
       });
 
       runInAction(() => {
-        if (response.status === StatusHTTP.Ok) {
+        if (response.status === StatusHTTP.OK) {
           try {
             this._meta = Meta.success;
             const repositories = collectionFromArray<number, RepoItemApi>(
