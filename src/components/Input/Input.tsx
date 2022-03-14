@@ -2,16 +2,14 @@ import { memo } from "react";
 
 export type InputProps = {
   className?: string;
-  type?: "text" | "checkbox" | "radio";
   value?: string;
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   disabled?: boolean;
 };
 
 const Input: React.FC<InputProps> = ({
   className = "",
-  type = "text",
   value = "",
   onChange,
   placeholder = "",
@@ -20,7 +18,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <input
       className={className}
-      type={type}
+      type="text"
       value={value}
       onChange={onChange}
       placeholder={placeholder}

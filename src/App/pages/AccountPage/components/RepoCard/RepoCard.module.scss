@@ -1,0 +1,56 @@
+@import "@styles/variables.scss";
+
+.card {
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: $light-gray;
+  box-shadow: 0px 16px 30px -10px $moderate-blue-shadow;
+  border-radius: 10px;
+  cursor: $cursor;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 33px;
+  color: $dark-grayish-blue;
+}
+
+.visibility {
+  padding: 2px 8px;
+  margin-left: 15px;
+  border: 1px solid $dark-moderate-blue;
+  border-radius: 20px;
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.stars {
+  margin-left: auto;
+}
+
+.star-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.description {
+  margin-bottom: 20px;
+}
+
+.info {
+  display: flex;
+  font-size: 15px;
+  line-height: 22px;
+  color: $dark-moderate-blue;
+
+  & *:not(:last-child) {
+    margin-right: 20px;
+  }
+}

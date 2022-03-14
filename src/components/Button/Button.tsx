@@ -2,15 +2,13 @@ import { memo } from "react";
 
 export type ButtonProps = {
   className?: string;
-  type?: "submit" | "button" | "reset";
   onClick: (e: React.MouseEvent<HTMLButtonElement>) => void;
   disabled?: boolean;
-  children: React.ReactNode;
+  children: React.ReactNode | string;
 };
 
 const Button: React.FC<ButtonProps> = ({
   className = "",
-  type = "submit",
   onClick,
   disabled = false,
   children,
@@ -18,7 +16,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <button
       className={className}
-      type={type}
+      type="submit"
       onClick={onClick}
       disabled={disabled}
     >

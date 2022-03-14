@@ -1,0 +1,70 @@
+@import "@styles/variables.scss";
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  padding-left: 70px;
+  background: $light-gray;
+  box-shadow: 0px 16px 30px -10px $moderate-blue-shadow;
+  border-radius: 15px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 23px;
+    left: 32px;
+    width: 24px;
+    height: 24px;
+    background-image: url("/assets/icons/search-icon.svg");
+  }
+}
+
+.input {
+  padding: 0 10px;
+  border: none;
+  width: 100%;
+  flex-grow: 1;
+  font-size: 18px;
+  line-height: 25px;
+  background-color: transparent;
+  caret-color: $pure-blue;
+  outline: none;
+
+  &::placeholder {
+    font-size: 18px;
+    line-height: 25px;
+    color: $dark-moderate-blue;
+  }
+}
+
+.button {
+  padding: 13px 23px;
+  border: none;
+  flex-shrink: 0;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: $white;
+  background-color: $pure-blue;
+  cursor: $cursor;
+
+  &:hover,
+  &:disabled {
+    opacity: 0.7;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.no-result {
+  padding: 0 10px;
+  flex-shrink: 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: $red;
+}

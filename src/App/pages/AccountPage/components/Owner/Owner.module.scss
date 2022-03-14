@@ -1,0 +1,40 @@
+@import "@styles/variables.scss";
+
+.owner {
+  grid-area: owner;
+}
+
+.icon {
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.link {
+  font: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline $dark-grayish-blue;
+    cursor: $cursor;
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
+  color: $dark-grayish-blue;
+  margin-bottom: 20px;
+}
+
+.followers {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 25px;
+  color: $dark-moderate-blue;
+
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+}

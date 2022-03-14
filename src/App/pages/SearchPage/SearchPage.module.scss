@@ -1,0 +1,13 @@
+@import "@styles/mixins.scss";
+
+@include container($width: 800px, $padding: 0 30px);
+
+.search-page {
+  display: grid;
+  grid-template-rows: 69px auto;
+  grid-template-areas:
+    "search-bar"
+    "card";
+  row-gap: 24px;
+  margin-top: 144px;
+}

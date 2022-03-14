@@ -3,29 +3,33 @@ import { getDate } from "@utils/getDate";
 export type AccountDataApi = {
   login: string;
   id: number;
-  repos_url: string;
   avatar_url: string;
   html_url: string;
   created_at: string;
-  updated_at: string;
   followers: number;
   type: string;
   email: string;
   location: string;
+  public_repos: number;
+  twitter_username: string;
+  blog: string;
+  following: number;
 };
 
 export type AccountDataModel = {
   login: string;
   id: number;
-  reposUrl: string;
   avatarUrl: string;
   htmlUrl: string;
   createdAt: string;
-  updatedAt: string;
   followers: number;
   type: string;
   email: string;
   location: string;
+  publicRepos: number;
+  twitterUsername: string;
+  blog: string;
+  following: number;
 };
 
 export const normalizeAccountData = (
@@ -34,15 +38,17 @@ export const normalizeAccountData = (
   return {
     login: from.login,
     id: from.id,
-    reposUrl: from.repos_url,
     avatarUrl: from.avatar_url,
     htmlUrl: from.html_url,
     createdAt: getDate(from.created_at),
-    updatedAt: getDate(from.updated_at),
     followers: from.followers,
     type: from.type,
     email: from.email,
     location: from.location,
+    publicRepos: from.public_repos,
+    twitterUsername: from.twitter_username,
+    blog: from.blog,
+    following: from.following,
   };
 };
 
@@ -88,6 +94,12 @@ export const normalizeOrganizationData = (
   };
 };
 
-export const isUser = (data: UserDataApi | OrganizationDataApi): boolean => {
+export const isUserApi = (data: UserDataApi | OrganizationDataApi): boolean => {
+  return data.type === "User";
+};
+
+export const isUserModel = (
+  data: UserDataModel | OrganizationDataModel
+): boolean => {
   return data.type === "User";
 };

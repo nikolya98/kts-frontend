@@ -1,11 +1,13 @@
 import {
-  isUser,
+  isUserApi,
   normalizeOrganizationData,
   normalizeUserData,
+  OrganizationDataApi,
   OrganizationDataModel,
+  UserDataApi,
   UserDataModel,
-} from "@models/gitHub/accountInfo/accountInfo";
-import { HTTPMethod, Meta, StatusHTTP } from "@shared/store/ApiStore/types";
+} from "@models/gitHub";
+import { HTTPMethod, Meta } from "@shared/store/ApiStore/types";
 import rootStoreInstance from "@store/RootStore";
 import { ILocalStore } from "@store/useLocalStore";
 import {
@@ -47,36 +49,35 @@ export default class AccountStore implements IAccountStore, ILocalStore {
     this._meta = Meta.loading;
     this._accountData = null;
 
-    try {
-      const response = await this._apiStore.request<
-        UserDataModel | OrganizationDataModel
-      >({
-        method: HTTPMethod.GET,
-        data: {},
-        headers: {},
-        endpoint: `/users/${params.accountName}`,
-      });
+    const response = await this._apiStore.request<
+      UserDataApi | OrganizationDataApi
+    >({
+      method: HTTPMethod.GET,
+      data: {},
+      headers: {},
+      endpoint: `/users/${params.accountName}`,
+    });
 
-      runInAction(() => {
-        try {
-          if (response.status === StatusHTTP.OK) {
-            this._meta = Meta.success;
-            if (isUser(response.data)) {
-              this._accountData = normalizeUserData(response.data);
-            } else {
-              this._accountData = normalizeOrganizationData(response.data);
-            }
-            return;
+    runInAction(() => {
+      try {
+        if (response.success) {
+          if (isUserApi(response.data)) {
+            this._accountData = normalizeUserData(response.data as UserDataApi);
+          } else {
+            this._accountData = normalizeOrganizationData(
+              response.data as OrganizationDataApi
+            );
           }
-        } catch (error) {
-          this._meta = Meta.error;
-          this._accountData = null;
+          this._meta = Meta.success;
+          return;
         }
-      });
-    } catch (error) {
-      this._meta = Meta.error;
-      this._accountData = null;
-    }
+        this._meta = Meta.error;
+        this._accountData = null;
+      } catch (error) {
+        this._meta = Meta.error;
+        this._accountData = null;
+      }
+    });
   }
 
   destroy() {

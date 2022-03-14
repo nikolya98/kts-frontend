@@ -1,5 +1,5 @@
 export type GetReposListParams = {
-  organizationName: string;
+  accountName: string;
 };
 
 export interface IReposListStore {

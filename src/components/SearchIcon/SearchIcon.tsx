@@ -1,19 +1,16 @@
-import { memo } from "react";
+import { IconProps } from "@shared/types/IconProps";
 
-export type SearchIconProps = {
-  className?: string;
-  fill?: string;
-};
-
-const SearchIcon: React.FC<SearchIconProps> = ({
+const SearchIcon: React.FC<IconProps> = ({
   className = "",
   fill = "white",
+  width = "24",
+  height = "24",
 }) => {
   return (
     <svg
       className={className}
-      width="24"
-      height="24"
+      width={width}
+      height={height}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -26,4 +23,4 @@ const SearchIcon: React.FC<SearchIconProps> = ({
   );
 };
 
-export default memo(SearchIcon);
+export default SearchIcon;

@@ -1,8 +1,4 @@
-import {
-  GitHubRepoOwnerApi,
-  GitHubRepoOwnerModel,
-  normalizeGitHubRepoOwnerData,
-} from "@models/gitHub";
+import { getDate } from "@utils/getDate";
 
 export type RepoItemApi = {
   id: number;
@@ -12,8 +8,9 @@ export type RepoItemApi = {
   html_url: string;
   branches_url: string;
   stargazers_count: number;
-  owner: GitHubRepoOwnerApi;
   updated_at: string;
+  language: string;
+  visibility: string;
 };
 
 export type RepoItemModel = {
@@ -24,8 +21,9 @@ export type RepoItemModel = {
   htmlUrl: string;
   branchesUrl: string;
   stargazersCount: number;
-  owner: GitHubRepoOwnerModel;
   updatedAt: string;
+  language: string;
+  visibility: string;
 };
 
 export const normalizeRepoItemData = (from: RepoItemApi): RepoItemModel => ({
@@ -36,6 +34,7 @@ export const normalizeRepoItemData = (from: RepoItemApi): RepoItemModel => ({
   htmlUrl: from.html_url,
   branchesUrl: from.branches_url,
   stargazersCount: from.stargazers_count,
-  owner: normalizeGitHubRepoOwnerData(from.owner),
-  updatedAt: from.updated_at,
+  updatedAt: getDate(from.updated_at),
+  language: from.language,
+  visibility: from.visibility,
 });

@@ -1,0 +1,11 @@
+@import "@styles/mixins.scss";
+
+@include container($width: 1170px, $padding: 0 15px);
+
+.account-page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-areas: "owner repositories";
+  column-gap: 20px;
+  margin-top: 50px;
+}

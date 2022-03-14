@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "Space Mono";
+  src: local("@assets/fonts/SpaceMono-Regular.woff2"),
+    local("@assets/fonts/SpaceMono-Regular.woff"),
+    local("@assets/fonts/SpaceMono-Regular.ttf");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Space Mono";
+  src: local("@assets/fonts/SpaceMono-Bold.woff2"),
+    local("@assets/fonts/SpaceMono-Bold.woff"),
+    local("@assets/fonts/SpaceMono-Bold.ttf");
+  font-style: normal;
+  font-weight: 700;
+}
