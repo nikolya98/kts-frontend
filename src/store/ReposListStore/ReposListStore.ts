@@ -55,7 +55,7 @@ class ReposListStore implements IReposListStore, ILocalStore {
 
     const response = await this._apiStore.request<RepoItemApi[]>({
       method: HTTPMethod.GET,
-      data: {},
+      data: params.data,
       headers: {},
       endpoint: `/users/${params.accountName}/repos`,
     });
