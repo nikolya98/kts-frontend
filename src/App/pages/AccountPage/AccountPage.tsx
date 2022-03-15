@@ -1,44 +1,51 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
-import { AccountOwnerModel } from "@models/gitHub";
-import ReposListStore from "@store/ReposListStore";
-import useLocalStore from "@store/useLocalStore";
-import { runInAction } from "mobx";
-import { observer } from "mobx-react-lite";
+import { AccountOwnerModel, RepoItemModel } from "@models/gitHub";
+import { Drawer } from "antd";
+import "antd/dist/antd.css";
 import { useLocation, useParams } from "react-router-dom";
 
 import accountPageStyle from "./AccountPage.module.scss";
+import BranchesList from "./components/BranchesList";
 import Owner from "./components/Owner";
 import RepositoriesList from "./components/RepositoriesList";
 
-type AccountPageParamsType = {
-  name: string;
-};
-
 const AccountPage: React.FC = (): JSX.Element => {
-  const reposListStore = useLocalStore(() => new ReposListStore());
-  const location = useLocation();
-  const { name } = useParams<AccountPageParamsType>();
+  const owner = useLocation().state as AccountOwnerModel;
+  const { name } = useParams();
+  const [drawerIsVisible, setDrawerIsVisible] = useState(false);
+  const [selectedRepo, setSelectedRepo] = useState<RepoItemModel | null>(null);
 
-  useEffect(
-    () =>
-      runInAction(() => {
-        if (name) {
-          reposListStore.getReposList({ accountName: name });
-        }
-      }),
-    []
-  );
+  const selectRepo = (repo: RepoItemModel): void => {
+    setSelectedRepo(repo);
+    setDrawerIsVisible(true);
+  };
+
+  const onClose = (): void => {
+    setDrawerIsVisible(false);
+  };
 
   return (
     <div className={accountPageStyle.container}>
       <div className={accountPageStyle["account-page"]}>
-        <Owner owner={location.state as AccountOwnerModel} />
+        <Owner owner={owner} />
+        <RepositoriesList onClick={selectRepo} account={name as string} />
 
-        <RepositoriesList repositories={reposListStore.reposList} />
+        <Drawer
+          placement="right"
+          width="320"
+          visible={drawerIsVisible}
+          onClose={() => {
+            onClose();
+          }}
+        >
+          {selectedRepo && (
+            <BranchesList account={name as string} repo={selectedRepo} />
+          )}
+        </Drawer>
       </div>
     </div>
   );
 };
 
-export default observer(AccountPage);
+export default AccountPage;

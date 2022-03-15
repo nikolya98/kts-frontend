@@ -7,6 +7,7 @@ import {
 } from "@models/Collection";
 import {
   BranchItemApi,
+  /* BranchItemInfoModel, */
   BranchItemModel,
   normalizeBranchItemData,
 } from "@models/gitHub";
@@ -39,6 +40,8 @@ class BranchesStore implements IBranchesStore, ILocalStore {
   private readonly _apiStore = rootStoreInstance.apiStore;
   private _branches: CollectionModel<number, BranchItemModel> =
     getInitialCollection();
+  /*   private _branchesInfo: CollectionModel<string, BranchItemInfoModel> =
+    getInitialCollection(); */
   private _meta = Meta.initial;
 
   get branches() {
@@ -53,15 +56,15 @@ class BranchesStore implements IBranchesStore, ILocalStore {
     this._meta = Meta.loading;
     this._branches = getInitialCollection();
 
-    try {
-      const response = await this._apiStore.request({
-        method: HTTPMethod.GET,
-        data: {},
-        headers: {},
-        endpoint: `/repos/${params.owner}/${params.repo}/branches`,
-      });
+    const response = await this._apiStore.request({
+      method: HTTPMethod.GET,
+      data: {},
+      headers: {},
+      endpoint: `/repos/${params.account}/${params.repo}/branches`,
+    });
 
-      runInAction(() => {
+    runInAction(() => {
+      try {
         if (response.status === StatusHTTP.OK) {
           const branches = collectionFromArray<number, BranchItemModel>(
             response.data
@@ -71,14 +74,15 @@ class BranchesStore implements IBranchesStore, ILocalStore {
             BranchItemApi,
             BranchItemModel
           >(branches, normalizeBranchItemData);
+          return;
         }
-      });
-    } catch (error) {
-      runInAction(() => {
         this._meta = Meta.error;
         this._branches = getInitialCollection();
-      });
-    }
+      } catch (error) {
+        this._meta = Meta.error;
+        this._branches = getInitialCollection();
+      }
+    });
   }
 
   destroy() {

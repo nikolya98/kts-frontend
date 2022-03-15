@@ -1,0 +1,41 @@
+@import "@styles/variables.scss";
+
+.title {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
+  color: $dark-grayish-blue;
+}
+
+.description {
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 33px;
+  color: $dark-grayish-blue;
+}
+
+.branch:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.branch-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.link {
+  color: $dark-moderate-blue;
+  text-decoration: none;
+
+  &:hover {
+    color: $dark-moderate-blue;
+    text-decoration: underline $dark-moderate-blue;
+    cursor: $cursor;
+  }
+}

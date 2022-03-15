@@ -23,7 +23,9 @@ const RepoCard: React.FC<RepoCardProps> = ({ repo }): JSX.Element => {
       </p>
       <ul className={repoCardStyle.info}>
         <li>Language: {repo.language || "Not available"}</li>
-        <li>Updated: {repo.updatedAt}</li>
+        <li>
+          Updated: <time>{repo.updatedAt}</time>
+        </li>
       </ul>
     </article>
   );

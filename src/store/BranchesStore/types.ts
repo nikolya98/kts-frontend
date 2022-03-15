@@ -1,5 +1,5 @@
 export type GetBranchesParams = {
-  owner: string;
+  account: string;
   repo: string;
 };
 

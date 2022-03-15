@@ -1,4 +1,5 @@
 @import "@styles/mixins.scss";
+@import "@styles/variables.scss";
 
 @include container($width: 1170px, $padding: 0 15px);
 

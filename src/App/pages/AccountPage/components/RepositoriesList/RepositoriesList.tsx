@@ -1,19 +1,35 @@
+import { useEffect } from "react";
+
 import { RepoItemModel } from "@models/gitHub";
+import ReposListStore from "@store/ReposListStore";
+import useLocalStore from "@store/useLocalStore";
+import { runInAction } from "mobx";
+import { observer } from "mobx-react-lite";
 
 import RepoCard from "../RepoCard";
 
 type RepositoriesListProps = {
-  repositories: RepoItemModel[];
+  onClick: (repo: RepoItemModel) => void;
+  account: string;
 };
 
 const RepositoriesList: React.FC<RepositoriesListProps> = ({
-  repositories,
+  onClick,
+  account,
 }): JSX.Element => {
+  const reposListStore = useLocalStore(() => new ReposListStore());
+  useEffect(
+    () =>
+      runInAction(() => {
+        reposListStore.getReposList({ accountName: account });
+      }),
+    []
+  );
   return (
     <ul>
-      {repositories.map((repo: RepoItemModel) => {
+      {reposListStore.reposList.map((repo: RepoItemModel) => {
         return (
-          <li key={repo.id}>
+          <li key={repo.id} onClick={() => onClick(repo)}>
             <RepoCard repo={repo} />
           </li>
         );
@@ -22,4 +38,4 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
   );
 };
 
-export default RepositoriesList;
+export default observer(RepositoriesList);

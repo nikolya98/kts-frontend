@@ -14,3 +14,7 @@ export const normalizeBranchItemData = (
   name: from.name,
   protected: from.protected,
 });
+
+/* export type BranchItemInfoApi = {};
+export type BranchItemInfoModel = {};
+ */
