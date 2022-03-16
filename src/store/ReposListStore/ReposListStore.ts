@@ -21,18 +21,17 @@ import {
   runInAction,
 } from "mobx";
 
-import { GetReposListParams } from "./types";
+import { GetReposListParams, IReposListStore } from "./types";
 
 type ReposListStorePrivateFields = "_reposList" | "_meta";
 
-class ReposListStore implements ILocalStore {
+class ReposListStore implements IReposListStore, ILocalStore {
   constructor() {
     makeObservable<ReposListStore, ReposListStorePrivateFields>(this, {
       _reposList: observable.ref,
       _meta: observable,
       reposList: computed,
       meta: computed,
-      setMeta: action,
       getReposList: action,
     });
   }
@@ -50,50 +49,38 @@ class ReposListStore implements ILocalStore {
     return this._meta;
   }
 
-  setMeta(newMeta: Meta): void {
-    this._meta = newMeta;
-  }
-
   async getReposList(params: GetReposListParams): Promise<void> {
     this._meta = Meta.loading;
     this._reposList = getInitialCollection();
 
-    try {
-      const response = await this._apiStore.request<RepoItemApi[]>({
-        method: HTTPMethod.GET,
-        data: {},
-        headers: {},
-        endpoint: `/orgs/${params.organizationName}/repos`,
-      });
+    const response = await this._apiStore.request<RepoItemApi[]>({
+      method: HTTPMethod.GET,
+      data: params.data,
+      headers: {},
+      endpoint: `/users/${params.accountName}/repos`,
+    });
 
-      runInAction(() => {
-        if (response.status === StatusHTTP.Ok) {
-          try {
-            this._meta = Meta.success;
-            const repositories = collectionFromArray<number, RepoItemApi>(
-              response.data
-            );
-            this._reposList = normalizeCollection<
-              number,
-              RepoItemApi,
-              RepoItemModel
-            >(repositories, normalizeRepoItemData);
-            return;
-          } catch (error) {
-            this._meta = Meta.error;
-            this._reposList = getInitialCollection();
-            return;
-          }
+    runInAction(() => {
+      try {
+        if (response.status === StatusHTTP.OK) {
+          const repositories = collectionFromArray<number, RepoItemApi>(
+            response.data
+          );
+          this._reposList = normalizeCollection<
+            number,
+            RepoItemApi,
+            RepoItemModel
+          >(repositories, normalizeRepoItemData);
+          this._meta = Meta.success;
+          return;
         }
-
-        this._meta = Meta.error;
-      });
-    } catch (error) {
-      runInAction(() => {
         this._meta = Meta.error;
         this._reposList = getInitialCollection();
-      });
-    }
+      } catch (error) {
+        this._meta = Meta.error;
+        this._reposList = getInitialCollection();
+      }
+    });
   }
 
   destroy() {

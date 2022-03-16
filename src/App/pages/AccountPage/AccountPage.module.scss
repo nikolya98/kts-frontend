@@ -1,0 +1,34 @@
+@import "@styles/mixins.scss";
+@import "@styles/variables.scss";
+
+@include container($width: 880px, $padding: 0 20px);
+
+@media (max-width: $desktop-width) {
+  @include container($width: 630px, $padding: 0 20px);
+}
+
+@media (max-width: $tablet-width) {
+  @include container($width: 360px, $padding: 0 20px);
+}
+
+.account-page {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  grid-template-areas: "owner repositories";
+  column-gap: 20px;
+  margin-top: 50px;
+
+  @media (max-width: $desktop-width) {
+    display: block;
+  }
+
+  @media (max-width: $tablet-width) {
+    margin-top: 30px;
+  }
+}
+
+.drawer {
+  @media (max-width: $tablet-width) {
+    margin-top: 30px;
+  }
+}

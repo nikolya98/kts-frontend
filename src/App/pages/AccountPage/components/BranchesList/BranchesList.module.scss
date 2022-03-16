@@ -1,0 +1,65 @@
+@import "@styles/variables.scss";
+
+.title {
+  margin-bottom: 15px;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
+  color: $dark-grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+.description {
+  margin-bottom: 15px;
+  font-size: 15px;
+  line-height: 25px;
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 25px;
+  }
+}
+
+.subtitle {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 33px;
+  color: $dark-grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 14px;
+    line-height: 22px;
+  }
+}
+
+.branch:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.branch-icon {
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.link {
+  font-size: 15px;
+  line-height: 25px;
+  color: $dark-moderate-blue;
+  text-decoration: none;
+
+  &:hover {
+    color: $dark-moderate-blue;
+    text-decoration: underline $dark-moderate-blue;
+    cursor: $cursor;
+  }
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 19px;
+  }
+}

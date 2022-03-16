@@ -1,5 +1,11 @@
+export type ReposListData = {
+  page: number;
+  per_page: number;
+};
+
 export type GetReposListParams = {
-  organizationName: string;
+  accountName: string;
+  data: ReposListData;
 };
 
 export interface IReposListStore {

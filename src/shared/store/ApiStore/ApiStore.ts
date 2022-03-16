@@ -1,7 +1,12 @@
-import fetch from "cross-fetch";
-import * as qs from "qs";
+import QueryString from "qs";
 
-import { ApiResponse, IApiStore, RequestParams, StatusHTTP } from "./types";
+import {
+  ApiResponse,
+  HTTPMethod,
+  IApiStore,
+  RequestParams,
+  StatusHTTP,
+} from "./types";
 
 export default class ApiStore implements IApiStore {
   readonly baseUrl: string;
@@ -10,21 +15,39 @@ export default class ApiStore implements IApiStore {
     this.baseUrl = baseUrl;
   }
 
+  getOptions<ReqT>(params: RequestParams<ReqT>): [RequestInfo, RequestInit] {
+    let endpoint: RequestInfo = `${this.baseUrl}${params.endpoint}`;
+    const options: RequestInit = {
+      method: params.method,
+      headers: { ...params.headers },
+    };
+
+    if (params.method === HTTPMethod.GET) {
+      endpoint = `${endpoint}?${QueryString.stringify(params.data)}`;
+    }
+
+    if (params.method === HTTPMethod.POST) {
+      options.headers = {
+        ...options.headers,
+        "Content-Type": "application/json;charset=utf-8",
+      };
+      options.body = JSON.stringify(params.data);
+    }
+
+    return [endpoint, options];
+  }
+
   async request<SuccessT, ErrorT = any, ReqT = {}>(
     params: RequestParams<ReqT>
   ): Promise<ApiResponse<SuccessT, ErrorT>> {
-    const url = `${this.baseUrl}${params.endpoint}?${qs.stringify(
-      params.data
-    )}`;
-
     try {
-      const response = await fetch(url);
+      const response = await fetch(...this.getOptions(params));
 
       if (response.ok) {
         return {
           success: true,
           data: await response.json(),
-          status: StatusHTTP.Ok,
+          status: StatusHTTP.OK,
         };
       }
 

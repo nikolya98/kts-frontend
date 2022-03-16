@@ -1,10 +1,12 @@
 @import "@styles/normalize.scss";
+@import "@styles/fonts.scss";
 @import "@styles/variables.scss";
 
 body {
-  font-family: "Roboto", sans-serif;
-  font-size: 14px;
-  line-height: 1.173em;
-  color: $main-font-color;
-  background-color: $background;
+  font-family: "Space Mono", monospace;
+  font-size: 15px;
+  line-height: 25px;
+  color: $dark-grayish-blue;
+  background-color: $light-background;
+  min-width: 360px;
 }
