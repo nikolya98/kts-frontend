@@ -1,0 +1,79 @@
+@import "@styles/variables.scss";
+
+.owner {
+  grid-area: owner;
+
+  @media (max-width: $desktop-width) {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 15px;
+  }
+}
+
+.avatar {
+  width: 250px;
+  height: 250px;
+  margin-bottom: 20px;
+
+  @media (max-width: $desktop-width) {
+    width: 125px;
+    height: 125px;
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: $tablet-width) {
+    width: 75px;
+    height: 75px;
+    margin-right: 15px;
+  }
+}
+
+.avatar-icon {
+  border-radius: 50%;
+}
+
+.link {
+  font: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline $dark-grayish-blue;
+    cursor: $cursor;
+  }
+}
+
+.title {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 39px;
+  color: $dark-grayish-blue;
+  margin-bottom: 20px;
+
+  @media (max-width: $desktop-width) {
+    margin-bottom: 0;
+    font-size: 21px;
+    line-height: 33px;
+  }
+}
+
+.followers {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  line-height: 25px;
+  color: $dark-moderate-blue;
+
+  & > *:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 19px;
+  }
+}

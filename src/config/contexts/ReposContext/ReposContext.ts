@@ -1,9 +1,9 @@
 import { createContext, useContext } from "react";
 
-import { RepoItem } from "@store/GitHubStore/types";
+import { RepoItemModel } from "@models/gitHub";
 
 type ReposContextType = {
-  repositories: RepoItem[];
+  repositories: RepoItemModel[];
   load?: (repoName: string) => Promise<any> | void;
 };
 

@@ -1,3 +1,10 @@
+export enum Meta {
+  initial = "initial",
+  loading = "loading",
+  success = "success",
+  error = "error",
+}
+
 export enum HTTPMethod {
   GET = "GET",
   POST = "POST",
@@ -11,7 +18,7 @@ export type RequestParams<ReqT> = {
 };
 
 export enum StatusHTTP {
-  Ok = 200,
+  OK = 200,
   InternalServerError = 500,
   UNEXPECTED_ERROR = "UNEXPECTED_ERROR",
 }

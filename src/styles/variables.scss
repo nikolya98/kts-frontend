@@ -7,5 +7,25 @@ $disabled-input: #f9f9f9;
 $link-hover: #208fbf;
 $star-gold: #ff9432;
 $border-radius: 6px;
-$cursor: pointer;
-/* url("@assets/iconcs/cursor.svg") пока не работает */
+$cursor: url("/assets/icons/cursor.svg"), pointer;
+
+/* common */
+$pure-blue: #0079ff;
+$red: #f74646;
+/* light mode */
+$grayish-blue: #697c9a;
+$dark-moderate-blue: #4b6a9b;
+$dark-grayish-blue: #2b3442;
+$pale-blue: #f6f8ff;
+$light-gray: #fefefe;
+$light-background: #f2f2f2;
+$moderate-blue-shadow: rgba(70, 96, 187, 0.198567);
+
+/* dark mode */
+$white: #ffffff;
+$dark-blue: #141d2f;
+$dark-desaturated-blue: #1e2a47;
+
+$desktop-width: 1200px;
+$tablet-width: 768px;
+$mobile-width: 360px;

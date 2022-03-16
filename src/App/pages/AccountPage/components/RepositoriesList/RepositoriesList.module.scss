@@ -1,0 +1,9 @@
+@import "@styles/variables.scss";
+
+.item {
+  margin-bottom: 20px;
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 15px;
+  }
+}

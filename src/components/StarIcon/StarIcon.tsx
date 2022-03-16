@@ -1,9 +1,11 @@
-export type StarIconProps = {
-  className?: string;
-  fill?: string;
-};
+import { IconProps } from "@shared/types/IconProps";
 
-const StarIcon: React.FC<StarIconProps> = ({ className, fill = "black" }) => {
+const StarIcon: React.FC<IconProps> = ({
+  className,
+  fill = "#4b6a9b",
+  width = "16",
+  height = "16",
+}) => {
   return (
     <svg
       className={className}
