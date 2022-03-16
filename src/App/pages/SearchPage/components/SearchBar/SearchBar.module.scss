@@ -10,6 +10,11 @@
   box-shadow: 0px 16px 30px -10px $moderate-blue-shadow;
   border-radius: 15px;
 
+  @media (max-width: $tablet-width) {
+    padding: 7px;
+    padding-left: 45px;
+  }
+
   &::before {
     content: "";
     position: absolute;
@@ -18,6 +23,14 @@
     width: 24px;
     height: 24px;
     background-image: url("/assets/icons/search-icon.svg");
+    background-size: cover;
+
+    @media (max-width: $tablet-width) {
+      top: 20px;
+      left: 16px;
+      width: 20px;
+      height: 20px;
+    }
   }
 }
 
@@ -32,10 +45,21 @@
   caret-color: $pure-blue;
   outline: none;
 
+  @media (max-width: $tablet-width) {
+    padding: 0 5px;
+    font-size: 13px;
+    line-height: 25px;
+  }
+
   &::placeholder {
     font-size: 18px;
     line-height: 25px;
     color: $dark-moderate-blue;
+
+    @media (max-width: $tablet-width) {
+      font-size: 13px;
+      line-height: 25px;
+    }
   }
 }
 
@@ -59,6 +83,12 @@
   &:disabled {
     cursor: default;
   }
+
+  @media (max-width: $tablet-width) {
+    padding: 12px 14px;
+    font-size: 14px;
+    line-height: 21px;
+  }
 }
 
 .no-result {
@@ -67,4 +97,10 @@
   font-size: 15px;
   line-height: 22px;
   color: $red;
+
+  @media (max-width: $tablet-width) {
+    padding: 0 5px;
+    font-size: 13px;
+    line-height: 25px;
+  }
 }

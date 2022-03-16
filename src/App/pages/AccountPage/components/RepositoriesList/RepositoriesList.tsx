@@ -8,6 +8,7 @@ import { observer } from "mobx-react-lite";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import RepoCard from "../RepoCard";
+import reposListStyle from "./RepositoriesList.module.scss";
 
 type RepositoriesListProps = {
   onClick: (repo: RepoItemModel) => void;
@@ -52,7 +53,11 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
       <ul>
         {reposList.map((repo: RepoItemModel) => {
           return (
-            <li key={repo.id} onClick={() => onClick(repo)}>
+            <li
+              className={reposListStyle.item}
+              key={repo.id}
+              onClick={() => onClick(repo)}
+            >
               <RepoCard repo={repo} />
             </li>
           );

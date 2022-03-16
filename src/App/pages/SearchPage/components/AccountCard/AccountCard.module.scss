@@ -3,42 +3,71 @@
 .card {
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-areas: "avatar content";
+  grid-template-areas:
+    "avatar header" "avatar about" "avatar stats"
+    "avatar socials";
   column-gap: 37px;
+  row-gap: 20px;
   padding: 48px;
   background-color: $light-gray;
   box-shadow: 0px 16px 30px -10px $moderate-blue-shadow;
   border-radius: 15px;
+
+  @media (max-width: $desktop-width) {
+    grid-template-areas:
+      "avatar header" "about about" "stats stats"
+      "socials socials";
+    column-gap: 41px;
+    padding: 40px;
+  }
+
+  @media (max-width: $tablet-width) {
+    padding: 30px 25px 50px;
+    column-gap: 20px;
+    row-gap: 25px;
+  }
 }
 
 .avatar {
   grid-area: avatar;
-  justify-self: start;
   width: 117px;
   height: 117px;
+
+  @media (max-width: $tablet-width) {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 .avatar-icon {
   border-radius: 50%;
 }
 
-.content {
-  display: grid;
-  grid-template-rows: auto;
-  row-gap: 20px;
-  grid-area: content;
-}
-
-.card-header {
+.header {
   display: flex;
   align-items: flex-start;
+  grid-area: header;
+
+  @media (max-width: $desktop-width) {
+    display: block;
+  }
+
+  @media (max-width: $tablet-width) {
+    margin-bottom: 10px;
+  }
 }
 
 .title {
+  margin-bottom: 0;
   font-weight: 700;
   font-size: 26px;
   line-height: 39px;
   color: $dark-grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 24px;
+  }
 }
 
 .title-link {
@@ -56,19 +85,37 @@
   font-size: 15px;
   line-height: 22px;
   color: $grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 19px;
+  }
 }
 
 .about {
+  margin-bottom: 0;
   color: $dark-moderate-blue;
   opacity: 0.75;
+  grid-area: about;
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 25px;
+  }
 }
 
 .stats {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-area: stats;
   padding: 16px 32px;
+  margin-bottom: 0;
   background-color: $pale-blue;
   border-radius: 10px;
+
+  @media (max-width: $tablet-width) {
+    padding: 18px 15px;
+  }
 }
 
 .stat-tltle {
@@ -76,24 +123,46 @@
   font-size: 13px;
   line-height: 19px;
   color: $dark-moderate-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 11px;
+    line-height: 16px;
+    text-align: center;
+  }
 }
 
 .stat-value {
   grid-row: 2 / span 1;
+  margin-bottom: 0;
   font-weight: 700;
   font-size: 22px;
   line-height: 33px;
   text-transform: uppercase;
   color: $dark-grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
 }
 
 .socials {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  grid-area: socials;
+  margin-bottom: 0;
   font-size: 15px;
   line-height: 22px;
   color: $dark-moderate-blue;
+
+  @media (max-width: $tablet-width) {
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+    font-size: 13px;
+    line-height: 19px;
+  }
 }
 
 .social-icon {

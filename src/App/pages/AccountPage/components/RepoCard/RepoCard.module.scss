@@ -2,7 +2,6 @@
 
 .card {
   padding: 20px;
-  margin-bottom: 20px;
   background-color: $light-gray;
   box-shadow: 0px 16px 30px -10px $moderate-blue-shadow;
   border-radius: 10px;
@@ -11,21 +10,28 @@
 
 .header {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 15px;
 }
 
 .title {
+  margin-right: 15px;
   margin-bottom: 0;
   font-weight: 700;
   font-size: 22px;
   line-height: 33px;
   color: $dark-grayish-blue;
+
+  @media (max-width: $tablet-width) {
+    font-size: 19px;
+    line-height: 31px;
+    overflow: hidden;
+  }
 }
 
 .visibility {
   padding: 2px 8px;
-  margin-left: 15px;
+  margin-left: auto;
   border: 1px solid $dark-moderate-blue;
   border-radius: 20px;
   font-size: 13px;
@@ -33,7 +39,13 @@
 }
 
 .stars {
-  margin-left: auto;
+  margin-left: 10px;
+  flex-shrink: 0;
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 19px;
+  }
 }
 
 .star-icon {
@@ -43,6 +55,11 @@
 
 .description {
   margin-bottom: 20px;
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 25px;
+  }
 }
 
 .info {
@@ -53,5 +70,10 @@
 
   & *:not(:last-child) {
     margin-right: 20px;
+  }
+
+  @media (max-width: $tablet-width) {
+    font-size: 13px;
+    line-height: 19px;
   }
 }
