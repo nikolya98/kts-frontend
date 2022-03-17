@@ -1,3 +1,5 @@
+import React from "react";
+
 import { IconProps } from "@shared/types/IconProps";
 
 const FollowersIcon: React.FC<IconProps> = ({

@@ -1,3 +1,5 @@
+import React from "react";
+
 import Avatar from "@components/Avatar";
 import FollowersIcon from "@components/FollowersIcon";
 import { AccountOwnerModel } from "@models/gitHub";

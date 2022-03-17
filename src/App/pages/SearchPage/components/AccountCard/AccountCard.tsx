@@ -1,4 +1,4 @@
-import { memo } from "react";
+import React, { memo } from "react";
 
 import Avatar from "@components/Avatar";
 import LinkIcon from "@components/LinkIcon";

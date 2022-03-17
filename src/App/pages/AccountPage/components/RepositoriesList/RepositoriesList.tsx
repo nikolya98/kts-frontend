@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { RepoItemModel } from "@models/gitHub";
 import ReposListStore from "@store/ReposListStore";

@@ -1,3 +1,5 @@
+import React from "react";
+
 import { IconProps } from "@shared/types/IconProps";
 
 const BranchIcon: React.FC<IconProps> = ({

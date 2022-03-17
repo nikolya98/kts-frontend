@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
 import BranchIcon from "@components/BranchIcon";
 import { BranchItemModel, RepoItemModel } from "@models/gitHub";

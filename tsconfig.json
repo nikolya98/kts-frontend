@@ -22,5 +22,6 @@
     "tsconfig.paths.json",
     "config-overrides.js",
     "typings.d.ts"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }
