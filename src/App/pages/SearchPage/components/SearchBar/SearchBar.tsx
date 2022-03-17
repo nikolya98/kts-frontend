@@ -19,8 +19,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onClick,
   isLoading,
 }): JSX.Element => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+  };
+
   return (
-    <form className={searchBarStyle["search-bar"]}>
+    <form onSubmit={handleSubmit} className={searchBarStyle["search-bar"]}>
       <Input
         className={searchBarStyle.input}
         value={initValue}
