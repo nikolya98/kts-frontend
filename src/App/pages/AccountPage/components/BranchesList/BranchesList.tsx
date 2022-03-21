@@ -45,7 +45,7 @@ const BranchesList: React.FC<BranchesListProps> = ({
                 <BranchIcon className={branchesListStyle["branch-icon"]} />
                 <a
                   className={branchesListStyle.link}
-                  href={`https://github.com/nikolya98/kts-frontend/tree/${branch.name}`}
+                  href={`https://github.com/${account}/${repo.name}/tree/${branch.name}`}
                 >
                   {branch.name}
                 </a>
