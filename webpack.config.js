@@ -50,6 +50,7 @@ module.exports = {
   target: isProduction ? "browserslist" : "web",
   entry: path.join(SOURCE, "index.tsx"),
   output: {
+    publicPath: "/",
     path: BUILD,
     filename: "bundle.js",
   },
