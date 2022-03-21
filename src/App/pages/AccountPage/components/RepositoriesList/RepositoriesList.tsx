@@ -36,7 +36,7 @@ const RepositoriesList: React.FC<RepositoriesListProps> = ({
           },
         });
       }),
-    [page]
+    [page, reposListStore, account]
   );
 
   useEffect(() => {

@@ -27,7 +27,7 @@ const SearchPage: React.FC = (): JSX.Element => {
       accountStore.getAccountData({ accountName: account });
       setAccount("");
     },
-    [account]
+    [account, accountStore]
   );
 
   return (

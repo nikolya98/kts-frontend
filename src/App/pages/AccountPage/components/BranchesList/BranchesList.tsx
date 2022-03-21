@@ -21,7 +21,7 @@ const BranchesList: React.FC<BranchesListProps> = ({
 
   useEffect(() => {
     branchesStore.getBranches({ account: account, repo: repo.name });
-  }, [repo]);
+  }, [repo, branchesStore, account]);
 
   return (
     <section className={branchesListStyle.container}>
