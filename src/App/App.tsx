@@ -1,3 +1,5 @@
+import React from "react";
+
 import AccountPage from "@pages/AccountPage";
 import SearchPage from "@pages/SearchPage";
 import { Routes, Route, Navigate } from "react-router-dom";

@@ -15,12 +15,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "typeRoots": ["src/node_modules/@types"]
   },
   "include": [
     "src",
     "tsconfig.paths.json",
     "config-overrides.js",
     "typings.d.ts"
-  ]
+  ],
+  "exclude": ["node_modules"]
 }
